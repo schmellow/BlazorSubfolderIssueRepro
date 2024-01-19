@@ -1,0 +1,32 @@
+﻿@inject IConfiguration _config
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="@BasePath" />
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="BlazorSubfolderIssueRepro.styles.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <HeadOutlet />
+</head>
+
+<body>
+    <Routes />
+    <script src="_framework/blazor.web.js"></script>
+</body>
+
+</html>
+
+@code {
+    private string BasePath
+    {
+        get
+        {
+            string? configuredPath = _config.GetValue<string>("BasePath");
+            return string.IsNullOrEmpty(configuredPath) ? "/" : configuredPath;
+        }
+    }
+}
